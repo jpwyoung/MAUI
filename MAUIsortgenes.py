@@ -6,11 +6,18 @@ from Bio.Alphabet import IUPAC
 from Bio.SeqRecord import SeqRecord
 from Bio import pairwise2
 
-#This script sorts sequences (previously assembled by PEAR) into separate files for 
-#rpoB, recA, nodA, nodD genes, based on a short unambiguous motif in the forward primer.
+"""
+This script sorts sequences (previously assembled by PEAR) into separate files for 
+each gene, based on a short unambiguous motif (tag) in the forward primer. 
+Sequences that do not match any tag are filed separately as "short" or "unknown".
+"""
 
+#===Project-specific details that will need to be modified for another project:
 working_folder = "/Users/peter/Documents/Sequence_data/MiSeq_2019-01_NCHAIN/clovergeno_andphusion_samples/"
-
+tag_to_gene = {"TCGCAG":"rpob","AGAATG":"reca", "GGATCT":"noda", "GCGTTT":"nodd"}
+tag_start,tag_end = 15,21
+min_length = 290
+#===
 
 def paf(print_string):
     """
@@ -22,50 +29,52 @@ def paf(print_string):
 
 def sort_by_tag(seq):
     """
-    Identify the gene for each read using a short motif in the forward primer 
+    Identify the gene for each read using a short motif in the forward primer and append
+    the sequence to the appropriate list in genes_dict
     """
-    genetag = str(seq[15:21].seq)
-    if genetag == "TCGCAG": genes_dict["rpob"].append(seq)
-    elif genetag == "AGAATG": genes_dict["reca"].append(seq)
-    elif genetag == "GGATCT": genes_dict["noda"].append(seq)
-    elif genetag == "GCGTTT": genes_dict["nodd"].append(seq)
-    elif len(seq) < 290:  genes_dict["short"].append(seq)
+    tag = str(seq[tag_start:tag_end].seq)
+    if tag in tag_to_gene:
+        genes_dict[tag_to_gene[tag]].append(seq)
+    elif len(seq) < min_length:  genes_dict["short"].append(seq)
     else: genes_dict["unknown"].append(seq)
     return()
 
+padding_seq = Seq("N", IUPAC.ambiguous_dna) 
+padding = SeqRecord(padding_seq)
 
-
+#Process the input files one at a time
 with open(working_folder + "list.txt") as list_file:
     for line in list_file:
+    
+        #sort out file names and get ready to read input
         file_name = line.rstrip("\n")
         if "/" in file_name:
-            file_name = file_name[file_name.rindex("/")+1:]
-
- 
+            file_name = file_name[file_name.rindex("/")+1:] 
         infile = working_folder + file_name
         sample = file_name[:file_name.find("_")]
         logfile = working_folder + sample + "_logfile.txt"
-
-
-
         seq_list = SeqIO.parse(infile, "fastq")  
 
-        genes_dict = {"rpob":["null"],"reca":["null"], "noda":["null"],"nodd":["null"],"unknown":["null"], "short":["null"]}
-        padding_seq = Seq("N", IUPAC.ambiguous_dna) 
-        padding = SeqRecord(padding_seq)
+        #initialise genes_dict
+        genes_dict = {"unknown":["null"], "short":["null"]}
+        for gene in tag_to_gene.values():
+            genes_dict[gene] = ["null"]
+        
+        #Add each sequence to the appropriate list in genes_dict
         n=0
         for seq in seq_list: 
             sort_by_tag(seq)
             n += 1
+            
+        #print information on sequence counts
         paf("\nSample: " + file_name[:-6])
-        paf("total input sequences: " + str(n))   
+        paf("total input sequences: " + str(n))
         paf("counts on first pass:")
         for each_gene_list in genes_dict:
             paf(each_gene_list + " " + str(len(genes_dict[each_gene_list])-1))
 
         #The most common error is a missing base in the seqid, so try the unidentified sequences
-        #again with a 1-base offset
-    
+        #again with a 1-base offset    
         if len(genes_dict["unknown"]) > 1:
             unknown_list = genes_dict["unknown"][1:]    
             genes_dict["unknown"] = ["null"]
@@ -77,11 +86,12 @@ with open(working_folder + "list.txt") as list_file:
                 new_seq.letter_annotations["phred_quality"] = [0] + annotations
                 sort_by_tag(new_seq)
 
+        #print the new counts
         paf("\ncounts allowing up to 1 missing base:")
-
         for each_gene_list in genes_dict:
             paf(each_gene_list + " " + str(len(genes_dict[each_gene_list])-1))
-    
+
+        #write the sorted sequences to the appropriate files    
         for gene_type in genes_dict:
             genes_dict[gene_type].pop(0)
             gene_file = working_folder + sample + "_" + gene_type + ".fastq"
