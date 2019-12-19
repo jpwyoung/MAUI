@@ -18,8 +18,8 @@ Sample data files for testing are provided in the 'Test' folder.
 
 ===
 
-MAUIsortgenes.py 
-
+MAUIsortgenes.py
+--- 
 This script uses BioPython, but is otherwise written in standard Python 3. The input files contain amplicon sequences in fastq format that have been assembled from paired-end reads using PEAR [Zhang, J, Kobert, K, Flouri, T, and Stamatakis, A. (2014). PEAR: a fast and accurate Illumina paired-end read merger. Bioinformatics. 30(5); 614.]. 
 
 It sorts sequences into separate files for each gene, based on a short unambiguous motif (tag) in the forward primer. Sequences that do not match any tag are filed separately as "short" or "unknown". It is very simple and does not allow mismatches. It produces files that are suitable as input for MAUIcount, but users may prefer to use other methods to create these single-gene fastq files.
@@ -27,7 +27,7 @@ It sorts sequences into separate files for each gene, based on a short unambiguo
 ===
 
 MAUIcount.py
-
+---
 This is the core script for the MAUI method. It is written in standard Python 3 and uses only modules in the Python standard library. It reads amplicon sequences from a set of fastq files.
 
 The first seqid_len bases of each read are a random tag, called a seqid or Unique Molecular Identifier (UMI). The script keeps track of how many times each UMI is used with each unique sequence. For the set of samples, outputs are files with a list of fasta sequences in descending rank order of abundance, and corresponding tables with the counts of each sequence in each sample.
@@ -49,7 +49,7 @@ If there is a file fastq_file_list.txt in the same folder as the data, only the 
 ===
 
 MC_parameters.py
-
+---
 This file is imported by MAUIcount.py and specifies the files to be analysed and gene-specific parameters. It should be in the same folder as the MAUIcount.py script (or another path that will be found). It needs to be edited appropriately for your project, and avoids the need for a long list of command line arguments.
 
 Sets of parameters for different genes and data sets can be 'stored' as commented-out lines in MC_parameters.
@@ -57,7 +57,7 @@ Sets of parameters for different genes and data sets can be 'stored' as commente
 ===
 
 Test
-
+---
 The folder Test provides some sample input data for MAUIcount.py. The supplied version of MC_parameters is set up to run an analysis of these data, provided that MAUIcount is run from the folder immediately above the Test folder. The command "python MAUIcount.py" should be sufficient, since all parameters are already set up in MC_parameters.py. If it is working correctly, MAUIcount should generate a new folder called MAUIcount_output within Test that has exactly the same files as the existing folder MAUIcount_expected_output.
 
 ===
