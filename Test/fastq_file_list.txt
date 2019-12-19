@@ -1,0 +1,8 @@
+test/1A_reca.fastq
+test/2A_reca.fastq
+test/3A_reca.fastq
+test/4A_reca.fastq
+test/5A_reca.fastq
+test/6A_reca.fastq
+test/7A_reca.fastq
+test/8A_reca.fastq

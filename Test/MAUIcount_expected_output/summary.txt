@@ -1,0 +1,26 @@
+MAUIcount.py
+test/
+
+2	read_diff
+0.7	reject_threshold
+0.001	add_limit
+
+587639	Raw read count
+574673	Total reads used
+71039	Total unique sequences
+
+Before truncation:
+33350	Total UMI counts
+31226	Total accepted counts
+679	Total UMI sequences
+213	Total accepted sequences
+
+After truncating to threshold:
+9	Reported UMI sequences
+7	Reported accepted sequences
+
+134	Reported read sequences
+
+2019-12-19 09:49:07.060315	Start time
+2019-12-19 09:49:10.249005	End time
+0:00:03.188690	Duration
