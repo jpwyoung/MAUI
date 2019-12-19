@@ -34,12 +34,11 @@ If there is a file fastq_file_list.txt in the same folder as the data, only the 
 in this file will be included in the analysis. If this file is not present, it will be  
 created with a list of all files that have the extension .fastq.
 
-Written by Peter Young. Version 01n on 14 August 2019.
+Written by Peter Young. Version 1 on 19 December 2019.
 """
 
 start_time = datetime.datetime.now()
 script_file = os.path.basename(__file__)
-version = script_file[10:-3]
 
 
 #Parameters that control the stringency of the analysis
@@ -180,8 +179,9 @@ for (sample_ID,fastq_filepath) in sample_tuples:
     
 #Prepare to output the results
 
-os.mkdir(working_folder + "MAUIcount_output_" + version)
-output_folder = working_folder + "MAUIcount_output_" + version + "/"    
+output_folder = working_folder + "MAUIcount_output/" 
+os.mkdir(output_folder[:-1])
+   
 
 fas_file = {}
 table_file = {}                
