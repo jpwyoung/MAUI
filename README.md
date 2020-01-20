@@ -4,7 +4,7 @@ MAUI-seq: Metabarcoding using amplicons with unique molecular identifiers to imp
 
 This is a method for using PCR amplicons to describe microbial diversity. A manuscript has been submitted for publication, and a reference will be provided here once it has been published. An early version of the method was described in the following preprint: https://www.biorxiv.org/content/10.1101/538587v2.abstract, but the current version is substantially different.
 
-This repository includes scripts for the analysis of amplicon sequences that incorporate a random sequence tag (seqid or Unique Molecular Identifier).
+This repository includes scripts for the analysis of amplicon sequences that incorporate a random sequence tag (UMI or Unique Molecular Identifier).
 
 
 
@@ -28,7 +28,7 @@ MAUIcount.py
 ---
 This is the core script for the MAUI method. It is written in standard Python 3 and uses only modules in the Python standard library. It reads amplicon sequences from a set of fastq files.
 
-The first seqid_len bases of each read are a random tag, called a seqid or Unique Molecular Identifier (UMI). The script keeps track of how many times each UMI is used with each unique sequence. For the set of samples, outputs are files with a list of fasta sequences in descending rank order of abundance, and corresponding tables with the counts of each sequence in each sample.
+The first UMI_len bases of each read are a random tag, called a Unique Molecular Identifier (UMI). The script keeps track of how many times each UMI is used with each unique sequence. For the set of samples, outputs are files with a list of fasta sequences in descending rank order of abundance, and corresponding tables with the counts of each sequence in each sample.
 
 Three output sets are produced by default:
 
@@ -41,6 +41,8 @@ Three output sets are produced by default:
 An additional output set can be produced by setting output_types = 4. This has the same filtering as accepted_sequences, but applied on a per-sample basis, rather than on totals across all samples. If allele frequencies vary greatly across samples, this would be preferable in principle, but it is not reliable unless read counts are very high. Otherwise, it can lead to sequences being stochastically deleted from some samples but not others.
 
 In all cases, the outputs are truncated to discard rare sequences that would have frequencies below add_limit in the overall set of samples. 
+
+Additional output files are summary.txt (various data about the run) and UMI_stats.tab (information on the distribution of read numbers per UMI that may be useful for optimising the protocol).
 
 If there is a file fastq_file_list.txt in the same folder as the data, only the files listed in this file will be included in the analysis. If this file is not present, it will be created with a list of all files that have the extension .fastq.
 
