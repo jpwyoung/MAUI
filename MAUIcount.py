@@ -63,7 +63,7 @@ output_read_counts = False
 #If set to true, output the total number of reads contributing to the UMI primary and secondary counts
 
 #Get info on file locations and gene-specific parameters from MC_parameters.py
-from MC_parameters_2020_01_20 import *
+from MC_parameters import *
 
 #Functions
 
@@ -211,7 +211,7 @@ for (sample_ID,fastq_filepath) in sample_tuples:
     
 #Prepare to output the results
 
-output_folder = working_folder + "MAUIcount_output_2020-01-20/" 
+output_folder = working_folder + "MAUIcount_output/" 
 os.mkdir(output_folder[:-1])
    
 
