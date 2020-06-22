@@ -24,34 +24,34 @@ output_read_counts = False #default False
 
 #Parameters that are specific for each amplicon, and the location of the data files.
 #Comment out all except one set.
-'''
+
 #For recA
 UMI_len = 13
 f_primer_len = 26
 r_primer_len = 23
 total_len = 313
-working_folder = "/Users/peter/Documents/Sequence_data/MAUI_Sara_2016/recA/"
+working_folder = "./Test/"
 '''
 #For rpoB
 UMI_len = 13
 f_primer_len = 19
 r_primer_len = 20
 total_len = 306
-working_folder = "/Users/peter/Documents/Sequence_data/MAUI_Sara_2016/rpoB/"
-'''
+working_folder = ""
+
 #For nodA
 UMI_len = 13
 f_primer_len = 17
 r_primer_len = 24
 total_len = 314
-working_folder = "/Users/peter/Documents/Sequence_data/MAUI_Sara_2016/nodA/"
+working_folder = ""
 
 #For nodD
 UMI_len = 13
 f_primer_len = 23
 r_primer_len = 18
 total_len = 308
-working_folder = "/Users/peter/Documents/Sequence_data/MAUI_Sara_2016/nodD/"
+working_folder = ""
 
 #For viciae nodD (see doi.org/10.1111/nph.16392)
 UMI_len = 13
