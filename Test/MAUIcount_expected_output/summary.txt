@@ -1,5 +1,5 @@
 MAUIcount.py
-test/
+./Test/
 
 2	read_diff
 0.7	reject_threshold
@@ -21,6 +21,6 @@ After truncating to threshold:
 
 134	Reported read sequences
 
-2019-12-19 09:49:07.060315	Start time
-2019-12-19 09:49:10.249005	End time
-0:00:03.188690	Duration
+2020-07-07 21:50:53.546148	Start time
+2020-07-07 21:50:56.785815	End time
+0:00:03.239667	Duration

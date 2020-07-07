@@ -2,7 +2,7 @@
 MAUI-seq: Metabarcoding using amplicons with unique molecular identifiers to improve error correction
 ===
 
-This is a method for using PCR amplicons to describe microbial diversity. A manuscript has been submitted for publication, and a reference will be provided here once it has been published. An early version of the method was described in the following preprint: https://www.biorxiv.org/content/10.1101/538587v2.abstract, but the current version is substantially different.
+This is a method for using PCR amplicons to describe microbial diversity. A manuscript has been submitted for publication, and a reference will be provided here once it has been published. A preprint is available at https://www.researchsquare.com/article/rs-12219/v1 (doi: 10.21203/rs.2.21630/v1).
 
 This repository includes scripts for the analysis of amplicon sequences that incorporate a random sequence tag (UMI or Unique Molecular Identifier).
 
@@ -19,7 +19,7 @@ Sample data files for testing are provided in the **'Test'** folder.
 
 MAUIsortgenes.py
 --- 
-This script uses BioPython, but is otherwise written in standard Python 3. The input files contain amplicon sequences in fastq format that have been assembled from paired-end reads using PEAR [Zhang, J, Kobert, K, Flouri, T, and Stamatakis, A. (2014). PEAR: a fast and accurate Illumina paired-end read merger. Bioinformatics. 30(5); 614.]. 
+This script uses BioPython, but is otherwise written in standard Python 3. The input files contain amplicon sequences in fastq format, for example, those that have been assembled from paired-end reads using PEAR [Zhang, J, Kobert, K, Flouri, T, and Stamatakis, A. (2014). PEAR: a fast and accurate Illumina paired-end read merger. Bioinformatics. 30(5); 614.]. 
 
 It sorts sequences into separate files for each gene, based on a short unambiguous motif (tag) in the forward primer. Sequences that do not match any tag are filed separately as "short" or "unknown". It is very simple and does not allow mismatches. It produces files that are suitable as input for MAUIcount, but users may prefer to use other methods to create these single-gene fastq files.
 
@@ -56,7 +56,7 @@ Sets of parameters for different genes and data sets can be 'stored' as commente
 
 Test
 ---
-The folder Test provides some sample input data for MAUIcount.py. The supplied version of MC_parameters is set up to run an analysis of these data, provided that MAUIcount is run from the folder immediately above the Test folder. The command "python MAUIcount.py" should be sufficient, since all parameters are already set up in MC_parameters.py. If it is working correctly, MAUIcount should generate a new folder called MAUIcount_output within Test that has exactly the same files as the existing folder MAUIcount_expected_output.
+The folder Test provides some sample input data for MAUIcount.py (a subset of the data in Figure 3 of the publication). The supplied version of MC_parameters is set up to run an analysis of these data, provided that MAUIcount is run from the folder immediately above the Test folder. The command "python3 MAUIcount.py" should be sufficient, since all parameters are already set up in MC_parameters.py. If it is working correctly, MAUIcount should generate a new folder called MAUIcount_output within Test that has exactly the same files as the existing folder MAUIcount_expected_output. N.B This software requires Python 3; it has not been tested with Python 2 and may not run as expected.
 
 ---
 Created by Peter Young peter.young@york.ac.uk
