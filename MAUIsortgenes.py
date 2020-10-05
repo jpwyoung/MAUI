@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from Bio import SeqIO
 from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
 from Bio.SeqRecord import SeqRecord
 
 """
@@ -38,7 +37,7 @@ def sort_by_tag(seq):
     else: genes_dict["unknown"].append(seq)
     return()
 
-padding_seq = Seq("N", IUPAC.ambiguous_dna) 
+padding_seq = Seq("N") 
 padding = SeqRecord(padding_seq)
 
 #Process the input files one at a time
