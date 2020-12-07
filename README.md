@@ -2,9 +2,9 @@
 MAUI-seq: Metabarcoding using amplicons with unique molecular identifiers to improve error correction
 ===
 
-This is a method for using PCR amplicons to describe microbial diversity. A manuscript has been submitted for publication, and a reference will be provided here once it has been published. A preprint is available at https://www.researchsquare.com/article/rs-12219/v1 (doi: 10.21203/rs.2.21630/v1).
+This is a method for using PCR amplicons to describe microbial diversity, described in Fields, B, Moeskjær, S, Friman, V‐P, Andersen, SU, Young, JPW. MAUI‐seq: Metabarcoding using amplicons with unique molecular identifiers to improve error correction. Mol Ecol Resour. 2020; 00: 1– 18. https://doi.org/10.1111/1755-0998.13294 
 
-This repository includes scripts for the analysis of amplicon sequences that incorporate a random sequence tag (UMI or Unique Molecular Identifier).
+This repository includes scripts used in that paper for the analysis of amplicon sequences that incorporate a random sequence tag (UMI or Unique Molecular Identifier).
 
 
 
